@@ -1,3 +1,8 @@
+<template>
+  <img :src="goldBackground3" class="full-width-image"/>
+  <button @click="goToHome">Get Promoted</button>
+</template>
+
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import goldBackground3 from '../assets/goldBackground3.jpg';
@@ -9,11 +14,6 @@ function goToHome() {
   router.push('/')
 }
 </script>
-
-<template>
-  <img :src="goldBackground3" class="full-width-image"/>
-  <button @click="goToHome">Get Promoted</button>
-</template>
 
 <style scoped>
 .full-width-image {

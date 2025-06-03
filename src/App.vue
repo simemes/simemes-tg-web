@@ -1,15 +1,14 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  <div>
-  </div>
   <router-view />
 </template>
+
+<script setup lang="ts">
+</script>
 
 <style>
 /* 全域 reset，這裡不能加 scoped */
 #app {
+  width: 100vh;
   padding: 0;
 }
 * {
@@ -24,7 +23,6 @@ html, body {
 }
 
 img {
-  max-width: 100%;
   display: block;
 }
 </style>
