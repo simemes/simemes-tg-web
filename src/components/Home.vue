@@ -1,51 +1,53 @@
 <template>
-  <img :src="farmBackground" class="full-width-image"/>
+  <main class="home">
+    <img :src="farmBackground" class="full-width-image"/>
 
-  <div class="container">
-    <!-- SIMemes Logo -->
-    <div class="logo">
-      <img :src="sim_logo" class="sim_logo"/>
-    </div>
-    <!-- player avatar -->
-    <div class="avatar ava-fadein">
-      <img :src="farmerGmove" class="avatar-img"/>
-    </div>
-    
-    <div class="context translate-context">
-      <!-- join -->
-      <div v-if="!isJoin">
-        <h2>Join The Early Access</h2>
-        <h4>What happens in SIMemes,</h4>
-        <h4>stays in SIMemes.</h4>
+    <div class="container">
+      <!-- SIMemes Logo -->
+      <div class="logo">
+        <img :src="sim_logo" class="sim_logo"/>
       </div>
-      <button @click="Join" class="btn joinbtn" v-if="!isJoin">Join</button>
-      <!-- 已經 join 時顯示 -->
-      <div v-if="isJoin">
-        <h2>Welcome to SIMemes!</h2>
-        <h4>You’re almost there…</h4>
+      <!-- player avatar -->
+      <div class="avatar ava-fadein">
+        <img :src="farmerGmove" class="avatar-img"/>
       </div>
-    </div>
-    
-    <div class="box translate-box">
-      <!-- isJoin && !isClaim -->
-      <div class="upgrade-box" v-if="isJoin && !isClaim">
-        <h4>Just claim and drink up</h4>
-        <div class="claim-pic-box">
-          <img :src="claim_pic" class="claim-pic"/>
+      
+      <div class="context translate-context">
+        <!-- join -->
+        <div v-if="!isJoin">
+          <h2>Join The Early Access</h2>
+          <h4>What happens in SIMemes,</h4>
+          <h4>stays in SIMemes.</h4>
         </div>
-        <button @click="Claim" class="btn">Claim</button>
-      </div>
-      <!-- isJoin && isClaim -->
-      <div class="upgrade-box" v-if="isJoin && isClaim">
-        <h4>Your early access reward</h4>
-        <div class="claim-pic-box">
-          <img :src="player_pic" class="claim-pic"/>
+        <button @click="Join" class="btn joinbtn" v-if="!isJoin">Join</button>
+        <!-- 已經 join 時顯示 -->
+        <div v-if="isJoin">
+          <h2>Welcome to SIMemes!</h2>
+          <h4>You’re almost there…</h4>
         </div>
-        <button @click="GoToTasks" class="btn">Upgrade</button>
       </div>
-    </div>
+      
+      <div class="box translate-box">
+        <!-- isJoin && !isClaim -->
+        <div class="upgrade-box" v-if="isJoin && !isClaim">
+          <h4>Just claim and drink up</h4>
+          <div class="claim-pic-box">
+            <img :src="claim_pic" class="claim-pic"/>
+          </div>
+          <button @click="Claim" class="btn">Claim</button>
+        </div>
+        <!-- isJoin && isClaim -->
+        <div class="upgrade-box" v-if="isJoin && isClaim">
+          <h4>Your early access reward</h4>
+          <div class="claim-pic-box">
+            <img :src="player_pic" class="claim-pic"/>
+          </div>
+          <button @click="GoToTasks" class="btn">Upgrade</button>
+        </div>
+      </div>
 
-  </div>
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -142,6 +144,10 @@ function Claim() {
 </script>
 
 <style scoped>
+.home {
+  width: 100%;
+  overflow: hidden;
+}
 .full-width-image {
   position: absolute;
   top: 0;

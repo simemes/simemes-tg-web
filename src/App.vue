@@ -8,7 +8,7 @@
 <style>
 /* 全域 reset，這裡不能加 scoped */
 #app {
-  width: 100vh;
+  width: 100%;
   padding: 0;
 }
 * {
