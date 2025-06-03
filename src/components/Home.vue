@@ -27,19 +27,19 @@
       </div>
       
       <div class="section bottom-[3%] px-5 translate-box">
-        <div class="bg-[#0D3768] h-[224px] w-full rounded-2xl py-[15px]" v-if="isJoin && !isClaim">
+        <div class="card" v-if="isJoin && !isClaim">
           <h4>Just claim and drink up</h4>
-          <div class="w-[80px] h-[80px] mx-auto my-5 border border-[#FFCE00] rounded-2xl">
+          <div class="w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222]">
             <img :src="claim_pic" class="w-full h-full object-contain"/>
           </div>
           <button @click="Claim" class="btn">Claim</button>
         </div>
-        <div class="bg-[#0D3768] h-[224px] w-full rounded-2xl py-[15px]" v-if="isJoin && isClaim">
+        <div class="card" v-if="isJoin && isClaim">
           <h4>Your early access reward</h4>
-          <div class="w-[80px] h-[80px] mx-auto my-5 border border-[#FFCE00] rounded-2xl">
+          <div class="w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222]">
             <img :src="player_pic" class="w-full h-full object-contain"/>
           </div>
-          <button @click="GoToTasks" class="btn">Upgrade</button>
+          <button @click="GoToTasks" class="btn" v-if="canUpgrade">Upgrade</button>
         </div>
       </div>
     </div>
@@ -60,9 +60,8 @@ import player_pic from '../assets/1.png';
 
 const router = useRouter()
 const isJoin = ref(false)
-// const isJoin = ref(true)
 const isClaim = ref(false)
-// const isClaim = ref(true)
+const canUpgrade = ref(true)
 
 onMounted(() => {
   // logo scale anim
@@ -142,6 +141,22 @@ function Claim() {
 .section {
   @apply absolute flex flex-col justify-center items-center w-full text-center font-[Impact,Charcoal,sans-serif] [text-shadow:2px_2px_0_#000,-2px_-2px_0_#000,2px_-2px_0_#000,-2px_2px_0_#000];
   margin-bottom: 20px;
+}
+
+.card {
+  @apply relative bg-[#0D3768] h-[224px] w-full py-[15px] border-[2px] border-[#001320] overflow-hidden z-0;
+  border-radius: 16px;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0A2F58;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  z-index: -1;
 }
 
 .btn {
