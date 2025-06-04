@@ -26,20 +26,34 @@
         </div>
       </div>
       
-      <div class="section bottom-[3%] px-5 translate-box">
-        <div class="card" v-if="isJoin && !isClaim">
-          <h4>Just claim and drink up</h4>
-          <div class="w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222]">
-            <img :src="claim_pic" class="w-full h-full object-contain"/>
+      <div class="section bottom-[3%] px-5 scale-box">
+        <!-- card -->
+        <div class="card" v-if="isJoin">
+          <!-- claim -->
+           <transition name="fade" leave-active-class="transition duration-200 ease-in" leave-from-class="opacity-100" leave-to-class="opacity-0">
+            <div v-if="!isClaim">
+              <h4>Just claim and drink up</h4>
+              <div class="w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222]">
+                <img :src="claim_pic" class="w-full h-full object-contain"/>
+              </div>
+            </div>
+           </transition>
+          <!-- upgrade -->
+          <div class="scale-upgrade">
+            <div v-if="isClaim">
+              <h4>Your early access reward</h4>
+              <div class="w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222]">
+                <img :src="player_pic" class="w-full h-full object-contain"/>
+              </div>
+            </div>
           </div>
-          <button @click="Claim" class="btn">Claim</button>
         </div>
-        <div class="card" v-if="isJoin && isClaim">
-          <h4>Your early access reward</h4>
-          <div class="w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222]">
-            <img :src="player_pic" class="w-full h-full object-contain"/>
-          </div>
-          <button @click="GoToTasks" class="btn" v-if="canUpgrade">Upgrade</button>
+        <!-- btn -->
+        <div class="absolute bottom-[-10px] w-full py-[15px] translate-btn">
+          <!-- claim -->
+          <button @click="Claim" class="btn" v-if="isJoin && !isClaim">Claim</button>
+          <!-- upgrade -->
+          <button @click="GoToTasks" class="btn translate-btn" v-if="isJoin && isClaim && canUpgrade">Upgrade</button>
         </div>
       </div>
     </div>
@@ -95,8 +109,8 @@ onMounted(() => {
     duration: 300,
     ease: createSpring({ stiffness: 120 }),
   })
-  animate('.translate-box', {
-    translateX: [ 100, 0 ],
+  animate('.scale-box', {
+    scale: [0.5, 1],
     opacity: [ 0, 1 ],
     delay: 2500,
     duration: 300,
@@ -104,76 +118,55 @@ onMounted(() => {
   })
 
 })
-// ============= 切換 Tasks 頁面 =============
-function GoToTasks() {
-  router.push('/tasks')
-}
+
 function Join() {
   isJoin.value = true
-  // translate anim(claim)
   animate('.translate-context', {
     translateX: [ 100, 0 ],
     opacity: [ 0, 1 ],
     duration: 300,
     ease: createSpring({ stiffness: 120 }),
   })
-  animate('.translate-box', {
-    translateX: [ 100, 0 ],
+  animate('.scale-box', {
+    scale: [0.5, 1],
+    opacity: [ 0, 1 ],
+    delay: 1000,
+    duration: 300,
+    ease: createSpring({ stiffness: 120 }),
+  })
+  animate('.translate-btn', {
+    translateY: [ 100, 0 ],
+    opacity: [ 0, 1 ],
+    delay: 2000,
+    duration: 300,
+    ease: createSpring({ stiffness: 120 }),
+  })
+}
+
+function Claim() {
+  isClaim.value = true
+  animate('.scale-upgrade', {
+    scale: [0.5, 1],
+    opacity: [ 0, 1 ],
+    duration: 300,
+    delay: 500,
+    ease: createSpring({ stiffness: 120 }),
+  })
+  animate('.translate-btn', {
+    translateY: [ 100, 0 ],
     opacity: [ 0, 1 ],
     delay: 1000,
     duration: 300,
     ease: createSpring({ stiffness: 120 }),
   })
 }
-function Claim() {
-  isClaim.value = true
-  // translate anim(upgrade)
-  animate('.translate-box', {
-    translateX: [ 100, 0 ],
-    opacity: [ 0, 1 ],
-    duration: 300,
-    ease: createSpring({ stiffness: 120 }),
-  })
+
+// ============= 切換 Tasks 頁面 =============
+function GoToTasks() {
+  router.push('/tasks')
 }
+
 </script>
 
 <style scoped>
-.section {
-  @apply absolute flex flex-col justify-center items-center w-full text-center font-[Impact,Charcoal,sans-serif] [text-shadow:2px_2px_0_#000,-2px_-2px_0_#000,2px_-2px_0_#000,-2px_2px_0_#000];
-  margin-bottom: 20px;
-}
-
-.card {
-  @apply relative bg-[#0D3768] h-[224px] w-full py-[15px] border-[2px] border-[#001320] overflow-hidden z-0;
-  border-radius: 16px;
-}
-.card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #0A2F58;
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  z-index: -1;
-}
-
-.btn {
-  @apply relative w-[180px] h-[48px] bg-[#FFDC30] font-[Impact,sans-serif] text-[14px] text-center overflow-hidden z-0 [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000] m-[10px];
-  border: 0.83px solid black;
-}
-.btn::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 50%;
-  background-color: #FBC222;
-  z-index: -1;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
 </style>
