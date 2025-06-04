@@ -33,8 +33,8 @@
            <transition name="fade" leave-active-class="transition duration-200 ease-in" leave-from-class="opacity-100" leave-to-class="opacity-0">
             <div v-if="!isClaim">
               <h4>Just claim and drink up</h4>
-              <div class="w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222]">
-                <img :src="claim_pic" class="w-full h-full object-contain"/>
+              <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
+                <img :src="drink" class="w-full h-full object-contain" ref="picRotate" />
               </div>
             </div>
            </transition>
@@ -42,8 +42,9 @@
           <div class="scale-upgrade">
             <div v-if="isClaim">
               <h4>Your early access reward</h4>
-              <div class="w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222]">
-                <img :src="player_pic" class="w-full h-full object-contain"/>
+              <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
+                <img :src="farmBackground" class="absolute" />
+                <img :src="player_pic" class="w-full h-full object-contain" ref="picRotate"/>
               </div>
             </div>
           </div>
@@ -62,20 +63,40 @@
 
 <script setup lang="ts">
 // 導入 plugin
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch, useTemplateRef } from 'vue';
 import { useRouter } from 'vue-router'
 import { animate, createSpring } from 'animejs';
 // 導入 assets
 import farmBackground from '../assets/farmBackground.jpg';
 import farmerGmove from '../assets/farmerGmove.png';
+import drink from '../assets/drink.png';
 import sim_logo from '../assets/sim_logo.png';
-import claim_pic from '../assets/23.png';
 import player_pic from '../assets/1.png';
 
 const router = useRouter()
 const isJoin = ref(false)
 const isClaim = ref(false)
 const canUpgrade = ref(true)
+
+const picRotate = useTemplateRef('picRotate')
+
+watch(picRotate, () => {
+  // console.log(testRef.value);
+  if (picRotate.value) {
+    animate(picRotate.value, {
+      keyframes: [
+        { rotate: 0, duration: 0 },
+        { rotate: -5, duration: 100 },
+        { rotate: 5, duration: 100 },
+        { rotate: -5, duration: 100 },
+        { rotate: 5, duration: 100 },
+        { rotate: 0, duration: 100 },
+        { rotate: 0, duration: 500 },
+      ],
+      loop: true,
+    })
+  }
+})
 
 onMounted(() => {
   // logo scale anim

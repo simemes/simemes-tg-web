@@ -1,8 +1,8 @@
 <template>
   <main class="w-full overflow-hidden">
     <img :src="goldBackground3" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
-    <transition name="fade" enter-active-class="transition duration-500 ease-out" enter-from-class="opacity-0" enter-to-class="opacity-100">
-      <div v-if="fadeIn" class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border">
+    <!-- fadein anim -->
+      <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border fadein">
 
         <!-- Get Promoted 示意區 -->
         <div class="section bottom-1/2 px-5">
@@ -10,15 +10,20 @@
           <!-- 半透明遮罩區 -->
           <div class="relative h-[224px] w-full py-[15px] bg-black/50 rounded-2xl overflow-hidden z-0 mt-3">
             <div class="flex px-10">
-              <div class="w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] text-sm/4">
-                <img :src="player_pic" class="w-full h-full object-contain"/>
+              <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] text-sm/4 overflow-hidden">
+                <img :src="farmBackground" class="absolute -z-10" />
+                <!-- pic rotate anim -->
+                <img :src="player_pic" class="w-full h-full object-contain pic-rotate"/>
                 <h4 class="mt-2">Farmer</h4>
               </div>
-              <div class="w-[80px] h-[80px] mx-auto mt-2 mb-2">
+              <!-- arrow anim -->
+              <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 arrow-anim">
                 <img :src="arrow_icon" class="w-full h-full object-contain"/>
               </div>
-              <div class="w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] text-sm/4">
-                <img :src="upgrade_pic" class="w-full h-full object-contain"/>
+              <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] text-sm/4 overflow-hidden">
+                <img :src="mcdonald" class="absolute -z-10" />
+                <!-- pic rotate anim -->
+                <img :src="upgrade_pic" class="w-full h-full object-contain pic-rotate"/>
                 <h4 class="mt-2">McDonald’s Intern</h4>
               </div>
             </div>
@@ -70,7 +75,6 @@
         </div>
         
       </div>
-    </transition>
   </main>
 </template>
 
@@ -79,6 +83,9 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router'
 import { animate } from 'animejs';
+// 導入素材
+import farmBackground from '../assets/farmBackground.jpg';
+import mcdonald from '../assets/mcdonald.jpg';
 import goldBackground3 from '../assets/goldBackground3.jpg';
 import player_pic from '../assets/1.png';
 import upgrade_pic from '../assets/2.png';
@@ -89,10 +96,31 @@ import invite_icon from '../assets/invite_icon.png';
 import check_icon from '../assets/check_icon.png';
 
 const router = useRouter()
-const fadeIn = ref(false)
 
 onMounted(() => {
-  fadeIn.value = true
+  animate('.fadein', {
+    opacity: [0, 1],
+    duration: 500,
+  })
+  animate('.arrow-anim', {
+    translateX: [ 5, 0 ],
+    ease: 'inQuad',
+    duration: 500,
+    loop: true,
+    alternate: true
+  })
+  animate('.pic-rotate', {
+    keyframes: [
+      { rotate: 0, duration: 0 },
+      { rotate: -5, duration: 100 },
+      { rotate: 5, duration: 100 },
+      { rotate: -5, duration: 100 },
+      { rotate: 5, duration: 100 },
+      { rotate: 0, duration: 100 },
+      { rotate: 0, duration: 500 },
+    ],
+    loop: true,
+  })
 })
 
 function goToHome() {
