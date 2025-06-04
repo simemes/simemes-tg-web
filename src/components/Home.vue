@@ -36,6 +36,7 @@
               <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
                 <img :src="drink" class="w-full h-full object-contain" ref="picRotate" />
               </div>
+              <button @click="Claim" class="btn" ref="claimBtnTrans">Claim</button>
             </div>
            </transition>
           <!-- upgrade -->
@@ -46,15 +47,9 @@
                 <img :src="farmBackground" class="absolute" />
                 <img :src="player_pic" class="w-full h-full object-contain" ref="picRotate"/>
               </div>
+              <button @click="GoToTasks" class="btn translate-btn" ref="upgradeBtnTrans">Upgrade</button>
             </div>
           </div>
-        </div>
-        <!-- btn -->
-        <div class="absolute bottom-[-10px] w-full py-[15px] translate-btn">
-          <!-- claim -->
-          <button @click="Claim" class="btn" v-if="isJoin && !isClaim">Claim</button>
-          <!-- upgrade -->
-          <button @click="GoToTasks" class="btn translate-btn" v-if="isJoin && isClaim && canUpgrade">Upgrade</button>
         </div>
       </div>
     </div>
@@ -78,10 +73,12 @@ const isJoin = ref(false)
 const isClaim = ref(false)
 const canUpgrade = ref(true)
 
-const picRotate = useTemplateRef('picRotate')
+// const picRotate = useTemplateRef('picRotate')
+const picRotate = ref(null)
+const claimBtnTrans = ref(null)
+const upgradeBtnTrans = ref(null)
 
 watch(picRotate, () => {
-  // console.log(testRef.value);
   if (picRotate.value) {
     animate(picRotate.value, {
       keyframes: [
@@ -94,6 +91,28 @@ watch(picRotate, () => {
         { rotate: 0, duration: 500 },
       ],
       loop: true,
+    })
+  }
+})
+watch(claimBtnTrans, () => {
+  if (claimBtnTrans.value) {
+    animate(claimBtnTrans.value, {
+      translateY: [ 100, 0 ],
+      opacity: [ 0, 1 ],
+      delay: 2000,
+      duration: 300,
+      ease: createSpring({ stiffness: 120 }),
+    })
+  }
+})
+watch(upgradeBtnTrans, () => {
+  if (upgradeBtnTrans.value) {
+    animate(upgradeBtnTrans.value, {
+      translateY: [ 100, 0 ],
+      opacity: [ 0, 1 ],
+      delay: 1000,
+      duration: 300,
+      ease: createSpring({ stiffness: 120 }),
     })
   }
 })
