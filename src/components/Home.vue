@@ -45,7 +45,7 @@
               <h4>Your early access reward</h4>
               <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
                 <img :src="farmBackground" class="absolute" />
-                <img :src="player_pic" class="w-full h-full object-contain" ref="picRotate"/>
+                <img :src="player_pic" class="relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
               </div>
               <button @click="GoToTasks" class="btn translate-btn" ref="upgradeBtnTrans">Upgrade</button>
             </div>

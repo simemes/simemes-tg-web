@@ -48,6 +48,10 @@
 
 /* ==================== Tasks Page ==================== */
 
+.lvl-name {
+  @apply  text-[14px] leading-[100%] [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000];
+}
+
 .task-item {
   @apply relative h-[80px] w-full overflow-hidden z-0;
   @apply bg-[linear-gradient(to_bottom,_#0A2F58_30%,_#16396F_30%)];

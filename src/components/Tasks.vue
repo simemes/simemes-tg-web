@@ -8,23 +8,28 @@
         <div class="section bottom-1/2 px-5">
           <h2>Level up and get promoted!</h2>
           <!-- 半透明遮罩區 -->
-          <div class="relative h-[224px] w-full py-[15px] bg-black/50 rounded-2xl overflow-hidden z-0 mt-3">
+          <div class="relative h-[224px] w-full py-[15px] bg-black/50 rounded-2xl overflow-hidden mt-3">
             <div class="flex px-10">
-              <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] text-sm/4 overflow-hidden">
-                <img :src="farmBackground" class="absolute -z-10" />
-                <!-- pic rotate anim -->
-                <img :src="player_pic" class="w-full h-full object-contain pic-rotate"/>
-                <h4 class="mt-2">Farmer</h4>
+              <div>
+                <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
+                  <img :src="farmBackground" class="absolute" />
+                  <!-- pic rotate anim -->
+                  <img :src="player_pic" class="relative -ml-1 mt-3 w-full h-full object-contain pic-rotate"/>
+                </div>
+                <h4 class="lvl-name">Farmer</h4>
               </div>
+
               <!-- arrow anim -->
               <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 arrow-anim">
                 <img :src="arrow_icon" class="w-full h-full object-contain"/>
               </div>
-              <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] text-sm/4 overflow-hidden">
-                <img :src="mcdonald" class="absolute -z-10" />
-                <!-- pic rotate anim -->
-                <img :src="upgrade_pic" class="w-full h-full object-contain pic-rotate"/>
-                <h4 class="mt-2">McDonald’s Intern</h4>
+              <div>
+                <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
+                  <img :src="mcdonald" class="absolute" />
+                  <!-- pic rotate anim -->
+                  <img :src="upgrade_pic" class="relative -ml-1 mt-3 w-full h-full object-contain pic-rotate"/>
+                </div>
+                <h4 class="lvl-name">McDonald’s Intern</h4>
               </div>
             </div>
           </div>
