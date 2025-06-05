@@ -3,7 +3,9 @@
     <img :src="goldBackground3" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <!-- fadein anim -->
       <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border fadein">
-
+        <div class="absolute top-0 left-0 p-5">
+          <img :src="back_btn" @click="GoToHome">
+        </div>
         <!-- Get Promoted 示意區 -->
         <div class="section bottom-1/2 px-5">
           <h2>Level up and get promoted!</h2>
@@ -35,7 +37,7 @@
           </div>
           <!-- btn -->
           <div class="absolute bottom-[10px] w-full translate-btn">
-            <button @click="goToHome" class="btn" v-if="true">Get Promoted</button>
+            <button @click="GetPromoted" class="btn type1" :class="{ disabled: btnIsDisabled}" :disabled="btnIsDisabled" ref="GetPromotedBtn">Get Promoted</button>
           </div>
         </div>
 
@@ -47,33 +49,36 @@
             <div class="task-item">
               <div class="h-[30%] flex justify-between px-3">
                 <h4>Follow SIMemes on Twitter</h4>
-                <h4>(1/1)</h4>
+                <h4>({{ task1_num }}/1)</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
                 <img :src="x_icon" class="h-[80%] object-contain"/>
-                <img :src="check_icon" class="h-[80%] object-contain"/>
+                <button v-if="!task1_checked" class="btn type2" @click="ClickTask1">Follow</button>
+                <img v-if="task1_checked" :src="check_icon" class="h-[80%] object-contain"/>
               </div>
             </div>
             <!-- 2nd -->
             <div class="task-item">
               <div class="h-[30%] flex justify-between px-3">
                 <h4>Follow SImemes announcements</h4>
-                <h4>(1/1)</h4>
+                <h4>({{ task2_num }}/1)</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
                 <img :src="tg_icon" class="h-[80%] object-contain"/>
-                <img :src="check_icon" class="h-[80%] object-contain"/>
+                <button v-if="!task2_checked" class="btn type2" @click="ClickTask2">Follow</button>
+                <img v-if="task2_checked" :src="check_icon" class="h-[80%] object-contain"/>
               </div>
             </div>
             <!-- 3th -->
             <div class="task-item">
               <div class="h-[30%] flex justify-between px-3">
                 <h4>Invite 2 friends</h4>
-                <h4>(2/2)</h4>
+                <h4>({{ task3_num }}/2)</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
                 <img :src="invite_icon" class="h-[80%] object-contain"/>
-                <img :src="check_icon" class="h-[80%] object-contain"/>
+                <button v-if="!task3_checked" class="btn type2" @click="ClickTask3">Invite</button>
+                <img v-if="task3_checked" :src="check_icon" class="h-[80%] object-contain"/>
               </div>
             </div>
           </div>
@@ -85,7 +90,7 @@
 
 <script setup lang="ts">
 // 導入 plugin
-import { onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import { animate } from 'animejs';
 // 導入素材
@@ -99,8 +104,23 @@ import x_icon from '../assets/x_icon.png';
 import tg_icon from '../assets/tg_icon.png';
 import invite_icon from '../assets/invite_icon.png';
 import check_icon from '../assets/check_icon.png';
+import back_btn from '../assets/back_btn.png';
 
 const router = useRouter()
+
+const btnIsDisabled = ref(true)
+
+const task1_checked = ref(false)
+const task2_checked = ref(false)
+const task3_checked = ref(false)
+
+const task1_num = ref(0)
+const task2_num = ref(0)
+const task3_num = ref(0)
+
+watch(task1_checked && task2_checked && task3_checked, () => {
+  btnIsDisabled.value = false
+})
 
 onMounted(() => {
   animate('.fadein', {
@@ -128,7 +148,26 @@ onMounted(() => {
   })
 })
 
-function goToHome() {
+function GoToHome() {
+  router.push('/')
+}
+
+function ClickTask1() {
+  task1_checked.value = true
+  task1_num.value = 1
+}
+
+function ClickTask2() {
+  task2_checked.value = true
+  task2_num.value = 1
+}
+
+function ClickTask3() {
+  task3_checked.value = true
+  task3_num.value = 2
+}
+
+function GetPromoted() {
   router.push('/')
 }
 

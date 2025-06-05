@@ -30,26 +30,25 @@
 }
 
 .btn {
-  @apply relative w-[180px] h-[48px] bg-[#FFDC30] font-[Impact,sans-serif] text-[14px] text-center overflow-hidden z-0 [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000] m-[10px];
+  @apply font-[Impact,sans-serif] text-center [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000] m-[10px];
+  @apply shadow-[inset_0px_-4px_0px_0px_#00000040] bg-[linear-gradient(to_bottom,_#FFDC30_50%,_#FBC222_50%,_#FFDC30_100%)];
   border: 0.83px solid black;
 }
-.btn::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 50%;
-  background-color: #FBC222;
-  z-index: -1;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+.type1 {
+  @apply w-[180px] h-[48px] text-[14px];
+}
+.type2 {
+  @apply w-[80px] h-[32px] text-[12px];
 }
 
 /* ==================== Tasks Page ==================== */
 
 .lvl-name {
   @apply  text-[14px] leading-[100%] [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000];
+}
+
+.disabled {
+  @apply bg-[linear-gradient(to_bottom,_#6D638A_50%,_#5D537A_50%,_#6D638A_100%)];
 }
 
 .task-item {

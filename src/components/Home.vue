@@ -18,7 +18,7 @@
           <h4>What happens in SIMemes,</h4>
           <h4>stays in SIMemes.</h4>
         </div>
-        <button @click="Join" class="btn m-[10px]" v-if="!isJoin">Join</button>
+        <button @click="Join" class="btn type1 m-[10px]" v-if="!isJoin">Join</button>
         <!-- 已經 join 時顯示 -->
         <div v-if="isJoin">
           <h2>Welcome to SIMemes!</h2>
@@ -36,7 +36,6 @@
               <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
                 <img :src="drink" class="w-full h-full object-contain" ref="picRotate" />
               </div>
-              <button @click="Claim" class="btn" ref="claimBtnTrans">Claim</button>
             </div>
            </transition>
           <!-- upgrade -->
@@ -47,10 +46,11 @@
                 <img :src="farmBackground" class="absolute" />
                 <img :src="player_pic" class="relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
               </div>
-              <button @click="GoToTasks" class="btn translate-btn" ref="upgradeBtnTrans">Upgrade</button>
             </div>
           </div>
         </div>
+        <button v-if="isJoin && !isClaim" @click="Claim" class="btn type1 absolute bottom-[10px]" ref="claimBtnTrans">Claim</button>
+        <button v-if="isJoin && isClaim" @click="GoToTasks" class="btn type1 absolute bottom-[10px] translate-btn" ref="upgradeBtnTrans">Upgrade</button>
       </div>
     </div>
   </main>
