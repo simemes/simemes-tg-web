@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 // 導入 plugin
-import { ref, onMounted, watch, useTemplateRef } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import { animate, createSpring } from 'animejs';
 // 導入 assets
@@ -71,7 +71,6 @@ import player_pic from '../assets/1.png';
 const router = useRouter()
 const isJoin = ref(false)
 const isClaim = ref(false)
-const canUpgrade = ref(true)
 
 // const picRotate = useTemplateRef('picRotate')
 const picRotate = ref(null)

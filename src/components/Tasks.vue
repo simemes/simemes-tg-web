@@ -85,7 +85,7 @@
 
 <script setup lang="ts">
 // 導入 plugin
-import { ref, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router'
 import { animate } from 'animejs';
 // 導入素材
