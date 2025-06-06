@@ -185,13 +185,6 @@ function Join() {
     duration: 300,
     ease: createSpring({ stiffness: 120 }),
   })
-  animate('.translate-btn', {
-    translateY: [ 100, 0 ],
-    opacity: [ 0, 1 ],
-    delay: 2000,
-    duration: 300,
-    ease: createSpring({ stiffness: 120 }),
-  })
 }
 
 function Claim() {
@@ -201,13 +194,6 @@ function Claim() {
     opacity: [ 0, 1 ],
     duration: 300,
     delay: 500,
-    ease: createSpring({ stiffness: 120 }),
-  })
-  animate('.translate-btn', {
-    translateY: [ 100, 0 ],
-    opacity: [ 0, 1 ],
-    delay: 1000,
-    duration: 300,
     ease: createSpring({ stiffness: 120 }),
   })
 }
