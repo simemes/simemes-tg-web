@@ -4,7 +4,7 @@
     <!-- fadein anim -->
       <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border fadein">
         <div class="absolute top-0 left-0 p-5">
-          <img :src="back_btn" @click="GoToHome">
+          <img :src="back_btn" @click="GoToHome" class="back-btn btn-click">
         </div>
         <!-- Get Promoted 示意區 -->
         <div class="section bottom-1/2 px-5">
@@ -37,7 +37,7 @@
           </div>
           <!-- btn -->
           <div class="absolute bottom-[10px] w-full translate-btn">
-            <button @click="GetPromoted" class="btn type1" :class="{ disabled: btnIsDisabled}" :disabled="btnIsDisabled" ref="GetPromotedBtn">Get Promoted</button>
+            <button @click="GetPromoted" class="btn type1" :class="{ disabled: btnIsDisabled, 'btn-click': !btnIsDisabled}" :disabled="btnIsDisabled" ref="GetPromotedBtn">Get Promoted</button>
           </div>
         </div>
 
@@ -53,7 +53,7 @@
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
                 <img :src="x_icon" class="h-[80%] object-contain"/>
-                <button v-if="!task1_checked" class="btn type2" @click="ClickTask1">Follow</button>
+                <button v-if="!task1_checked" class="btn btn-click type2" @click="ClickTask1">Follow</button>
                 <img v-if="task1_checked" :src="check_icon" class="h-[80%] object-contain"/>
               </div>
             </div>
@@ -65,7 +65,7 @@
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
                 <img :src="tg_icon" class="h-[80%] object-contain"/>
-                <button v-if="!task2_checked" class="btn type2" @click="ClickTask2">Follow</button>
+                <button v-if="!task2_checked" class="btn btn-click type2" @click="ClickTask2">Follow</button>
                 <img v-if="task2_checked" :src="check_icon" class="h-[80%] object-contain"/>
               </div>
             </div>
@@ -77,7 +77,7 @@
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
                 <img :src="invite_icon" class="h-[80%] object-contain"/>
-                <button v-if="!task3_checked" class="btn type2" @click="ClickTask3">Invite</button>
+                <button v-if="!task3_checked" class="btn btn-click type2" @click="ClickTask3">Invite</button>
                 <img v-if="task3_checked" :src="check_icon" class="h-[80%] object-contain"/>
               </div>
             </div>
@@ -118,8 +118,15 @@ const task1_num = ref(0)
 const task2_num = ref(0)
 const task3_num = ref(0)
 
+const GetPromotedBtn = ref(null)
+
 watch(task1_checked && task2_checked && task3_checked, () => {
   btnIsDisabled.value = false
+})
+// btn 脈動 anim
+watch(btnIsDisabled, () => {
+  // 解開按鈕失效時啟動
+  if (!btnIsDisabled.value && GetPromotedBtn.value) animatePulse(GetPromotedBtn.value)
 })
 
 onMounted(() => {
@@ -169,6 +176,19 @@ function ClickTask3() {
 
 function GetPromoted() {
   router.push('/')
+}
+
+function animatePulse(target: HTMLElement | null) {
+  if (!target) return
+  animate(target, {
+    keyframes: [
+      { scale: 1, duration: 0 },
+      { scale: 1.1, duration: 200 },
+      { scale: 1, duration: 200 },
+      { scale: 1, duration: 3000 },
+    ],
+    loop: true,
+  })
 }
 
 </script>

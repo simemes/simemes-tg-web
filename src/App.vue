@@ -33,6 +33,14 @@
   @apply font-[Impact,sans-serif] text-center [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000] m-[10px];
   @apply shadow-[inset_0px_-4px_0px_0px_#00000040] bg-[linear-gradient(to_bottom,_#FFDC30_50%,_#FBC222_50%,_#FFDC30_100%)];
   border: 0.83px solid black;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+}
+.btn-click {
+  @apply transition-transform duration-100 active:scale-90 select-none outline-none ring-0;
 }
 .type1 {
   @apply w-[180px] h-[48px] text-[14px];
@@ -42,6 +50,15 @@
 }
 
 /* ==================== Tasks Page ==================== */
+
+.back-btn {
+  @apply transition-transform duration-100 active:scale-90 select-none outline-none ring-0;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+}
 
 .lvl-name {
   @apply  text-[14px] leading-[100%] [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000];

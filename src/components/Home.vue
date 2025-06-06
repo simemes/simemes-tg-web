@@ -18,7 +18,7 @@
           <h4>What happens in SIMemes,</h4>
           <h4>stays in SIMemes.</h4>
         </div>
-        <button @click="Join" class="btn type1 m-[10px]" v-if="!isJoin">Join</button>
+        <button @click="Join" class="btn btn-click type1 m-[10px]" v-if="!isJoin" ref="joinBtn">Join</button>
         <!-- 已經 join 時顯示 -->
         <div v-if="isJoin">
           <h2>Welcome to SIMemes!</h2>
@@ -49,8 +49,8 @@
             </div>
           </div>
         </div>
-        <button v-if="isJoin && !isClaim" @click="Claim" class="btn type1 absolute bottom-[10px]" ref="claimBtnTrans">Claim</button>
-        <button v-if="isJoin && isClaim" @click="GoToTasks" class="btn type1 absolute bottom-[10px] translate-btn" ref="upgradeBtnTrans">Upgrade</button>
+        <button v-if="isJoin && !isClaim" @click="Claim" class="btn btn-click type1 absolute bottom-[10px]" ref="claimBtnTrans">Claim</button>
+        <button v-if="isJoin && isClaim" @click="GoToTasks" class="btn btn-click type1 absolute bottom-[10px] translate-btn" ref="upgradeBtnTrans">Upgrade</button>
       </div>
     </div>
   </main>
@@ -76,6 +76,7 @@ const isClaim = ref(false)
 const picRotate = ref(null)
 const claimBtnTrans = ref(null)
 const upgradeBtnTrans = ref(null)
+const joinBtn = ref(null)
 
 watch(picRotate, () => {
   if (picRotate.value) {
@@ -114,6 +115,17 @@ watch(upgradeBtnTrans, () => {
       ease: createSpring({ stiffness: 120 }),
     })
   }
+})
+
+// btn 脈動 anim
+watch(joinBtn, () => {
+  if (joinBtn.value) animatePulse(joinBtn.value)
+})
+watch(claimBtnTrans, () => {
+  if (claimBtnTrans.value) animatePulse(claimBtnTrans.value)
+})
+watch(upgradeBtnTrans, () => {
+  if (upgradeBtnTrans.value) animatePulse(upgradeBtnTrans.value)
 })
 
 onMounted(() => {
@@ -197,6 +209,20 @@ function Claim() {
     delay: 1000,
     duration: 300,
     ease: createSpring({ stiffness: 120 }),
+  })
+}
+
+// 按鈕動畫
+function animatePulse(target: HTMLElement | null) {
+  if (!target) return
+  animate(target, {
+    keyframes: [
+      { scale: 1, duration: 0 },
+      { scale: 1.1, duration: 200 },
+      { scale: 1, duration: 200 },
+      { scale: 1, duration: 3000 },
+    ],
+    loop: true,
   })
 }
 
