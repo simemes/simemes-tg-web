@@ -1,6 +1,6 @@
 <template>
   <main class="w-full overflow-hidden">
-    <img :src="farmBackground" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
+    <img :src="FarmerBG" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border">
       <!-- SIMemes Logo -->
       <div class="section logo">
@@ -43,8 +43,8 @@
             <div v-if="isClaim">
               <h4>Your early access reward</h4>
               <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
-                <img :src="farmBackground" class="absolute" />
-                <img :src="player_pic" class="relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
+                <img :src="FarmerBG" class="absolute" />
+                <img :src="FarmerPic" class="relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
               </div>
             </div>
           </div>
@@ -62,11 +62,11 @@ import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import { animate, createSpring } from 'animejs';
 // 導入 assets
-import farmBackground from '../assets/farmBackground.jpg';
+import FarmerBG from '../assets/FarmerBG.jpg';
 import farmerGmove from '../assets/farmerGmove.png';
 import drink from '../assets/drink.png';
 import sim_logo from '../assets/sim_logo.png';
-import player_pic from '../assets/1.png';
+import FarmerPic from '../assets/FarmerPic.png';
 
 const router = useRouter()
 const isJoin = ref(false)
