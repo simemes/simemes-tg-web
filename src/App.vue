@@ -53,6 +53,18 @@
   height: 100%;
 }
 
+.border-shadow-lvl0 {
+  @apply border-[#FFFFFF] shadow-[#FFFCEE];
+}
+.border-shadow-lvl1 {
+  @apply border-[#FFE564] shadow-[#FFDC30];
+}
+.border-shadow-lvl2 {
+  @apply border-[#2063FF] shadow-[#AADAFF];
+}
+.border-shadow-lvl3 {
+  @apply border-[#FF373B] shadow-[#FE696C];
+}
 /* ==================== Tasks Page ==================== */
 
 .back-btn {
