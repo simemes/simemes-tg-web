@@ -42,7 +42,7 @@
           <div class="scale-upgrade">
             <div v-if="isClaim">
               <h4>{{ home_context.upgrade.title }}</h4>
-              <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
+              <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden" :class="`border-shadow-lvl${userLvl}`">
                 <img :src="userBG" class="absolute" />
                 <img :src="userPic" class="relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
               </div>
