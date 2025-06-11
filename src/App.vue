@@ -49,6 +49,10 @@
   @apply w-[80px] h-[32px] text-[12px];
 }
 
+.top-lvl-card {
+  height: 100%;
+}
+
 /* ==================== Tasks Page ==================== */
 
 .back-btn {

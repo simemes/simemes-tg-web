@@ -13,26 +13,26 @@
       
       <div class="section top-1/2 translate-context">
         <!-- join -->
-        <div v-if="!isJoin">
-          <h2>Join The Early Access</h2>
-          <h4>What happens in SIMemes,</h4>
-          <h4>stays in SIMemes.</h4>
+        <div v-if="!isJoin && !isClaim">
+          <h2>{{ home_context.join.title }}</h2>
+          <h4 class="w-50 text-[14px]">{{ home_context.join.txt }}</h4>
         </div>
-        <button @click="Join" class="btn btn-click type1 m-[10px]" v-if="!isJoin" ref="joinBtn">Join</button>
+        <button @click="Join" class="btn btn-click type1 m-[10px]" v-if="!isJoin" ref="joinBtn">{{ home_context.join.btn }}</button>
         <!-- 已經 join 時顯示 -->
         <div v-if="isJoin">
-          <h2>Welcome to SIMemes!</h2>
-          <h4>You’re almost there…</h4>
+          <h2>{{ home_context.join.isJoinTitle }}</h2>
+          <h4 v-if="!isClaim" class="w-50 text-[14px]">{{ home_context.join.isJoinTxt }}</h4>
+          <h4 v-if="isClaim" class="w-50 text-[14px]">{{ home_context.join.isClaimTxt }}</h4>
         </div>
       </div>
       
       <div class="section bottom-[3%] px-5 scale-box">
         <!-- card -->
-        <div class="card" v-if="isJoin">
+        <div class="card" :class="{ 'top-lvl-card': userLvl >= 3}" v-if="isJoin">
           <!-- claim -->
            <transition name="fade" leave-active-class="transition duration-200 ease-in" leave-from-class="opacity-100" leave-to-class="opacity-0">
             <div v-if="!isClaim">
-              <h4>Just claim and drink up</h4>
+              <h4>{{ home_context.claim.title }}</h4>
               <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
                 <img :src="drink" class="w-full h-full object-contain" ref="picRotate" />
               </div>
@@ -41,16 +41,17 @@
           <!-- upgrade -->
           <div class="scale-upgrade">
             <div v-if="isClaim">
-              <h4>Your early access reward</h4>
-              <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
-                <img :src="FarmerBG" class="absolute" />
-                <img :src="FarmerPic" class="relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
+              <h4>{{ home_context.upgrade.title }}</h4>
+              <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
+                <img :src="userBG" class="absolute" />
+                <img :src="userPic" class="relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
               </div>
+              <h4 class="lvl-name">{{ home_context.lvl[userLvl] }}</h4>
             </div>
           </div>
         </div>
-        <button v-if="isJoin && !isClaim" @click="Claim" class="btn btn-click type1 absolute bottom-[10px]" ref="claimBtnTrans">Claim</button>
-        <button v-if="isJoin && isClaim" @click="GoToTasks" class="btn btn-click type1 absolute bottom-[10px] translate-btn" ref="upgradeBtnTrans">Upgrade</button>
+        <button v-if="isJoin && !isClaim" @click="Claim" class="btn btn-click type1 absolute bottom-[10px]" ref="claimBtnTrans">{{ home_context.claim.btn }}</button>
+        <button v-if="isJoin && isClaim && userLvl < 3" @click="GoToTasks" class="btn btn-click type1 absolute bottom-[10px] translate-btn" ref="upgradeBtnTrans">{{ home_context.upgrade.btn }}</button>
       </div>
     </div>
   </main>
@@ -58,7 +59,7 @@
 
 <script setup lang="ts">
 // 導入 plugin
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { useRouter } from 'vue-router'
 import { animate, createSpring } from 'animejs';
 // 導入 assets
@@ -66,7 +67,6 @@ import FarmerBG from '../assets/FarmerBG.jpg';
 import farmerGmove from '../assets/farmerGmove.png';
 import drink from '../assets/drink.png';
 import sim_logo from '../assets/sim_logo.png';
-import FarmerPic from '../assets/FarmerPic.png';
 
 const router = useRouter()
 const isJoin = ref(false)
@@ -77,6 +77,39 @@ const picRotate = ref(null)
 const claimBtnTrans = ref(null)
 const upgradeBtnTrans = ref(null)
 const joinBtn = ref(null)
+
+const userLvl = ref(0)
+
+const home_context = ref({
+  lvl: ['Farmer','McDonald\'s Intern','Merch','President'],
+  join: {
+    title: 'Join The Early Access',
+    txt: 'What happens in SIMemes, stays in SIMemes.',
+    isJoinTitle: 'Welcome to SIMemes!',
+    isJoinTxt: 'You’re almost there...',
+    isClaimTxt: 'You’re in, stay tuned...',
+    btn: 'Join'
+  },
+  claim: {
+    title: 'Just claim and drink up',
+    btn: 'Claim'
+  },
+  upgrade: {
+    title: 'Your early access reward',
+    btn: 'Upgrade'
+  }
+})
+
+// ============================ computed ============================
+// 升等圖
+const userPic = computed(() => {
+  return '/src/assets/' + home_context.value.lvl[userLvl.value] + 'Pic.png'
+})
+const userBG = computed(() => {
+  return '/src/assets/' + home_context.value.lvl[userLvl.value] + 'BG.jpg'
+})
+
+// ============================ watch ============================
 
 watch(picRotate, () => {
   if (picRotate.value) {
@@ -128,7 +161,14 @@ watch(upgradeBtnTrans, () => {
   if (upgradeBtnTrans.value) animatePulse(upgradeBtnTrans.value)
 })
 
+// ============================ onMounted ============================
+
 onMounted(() => {
+  // 抓 user 等級
+  userLvl.value = 0
+  // isJoin.value = true
+  // isClaim.value = true
+
   // logo scale anim
   animate('.logo', {
     scale: 1.1,
@@ -169,6 +209,8 @@ onMounted(() => {
   })
 
 })
+
+// ============================ function ============================
 
 function Join() {
   isJoin.value = true

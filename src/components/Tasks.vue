@@ -18,7 +18,7 @@
                   <!-- pic rotate anim -->
                   <img :src="userPic" class="relative -ml-1 mt-3 w-full h-full object-contain pic-rotate"/>
                 </div>
-                <h4 class="lvl-name">{{ tasks_context.lvl[useLvl] }}</h4>
+                <h4 class="lvl-name">{{ tasks_context.lvl[userLvl] }}</h4>
               </div>
 
               <!-- arrow anim -->
@@ -31,7 +31,7 @@
                   <!-- pic rotate anim -->
                   <img :src="userNextPic" class="relative -ml-1 mt-3 w-full h-full object-contain pic-rotate"/>
                 </div>
-                <h4 class="lvl-name">{{ tasks_context.lvl[useLvl + 1] }}</h4>
+                <h4 class="lvl-name">{{ tasks_context.lvl[userLvl + 1] }}</h4>
               </div>
             </div>
           </div>
@@ -48,7 +48,7 @@
             <!-- 1st -->
             <div class="task-item">
               <div class="h-[30%] flex justify-between px-3">
-                <h4>{{ tasks_context.tasks.lvl[useLvl].task1 }}</h4>
+                <h4>{{ tasks_context.tasks.lvl[userLvl].task1 }}</h4>
                 <h4>({{ task1_num }}/1)</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
@@ -60,7 +60,7 @@
             <!-- 2nd -->
             <div class="task-item">
               <div class="h-[30%] flex justify-between px-3">
-                <h4>{{ tasks_context.tasks.lvl[useLvl].task2 }}</h4>
+                <h4>{{ tasks_context.tasks.lvl[userLvl].task2 }}</h4>
                 <h4>({{ task2_num }}/1)</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
@@ -72,8 +72,8 @@
             <!-- 3th -->
             <div class="task-item">
               <div class="h-[30%] flex justify-between px-3">
-                <h4>{{ tasks_context.tasks.lvl[useLvl].task3 }}</h4>
-                <h4>({{ task3_num }}/{{ tasks_context.tasks.inviteAmount[useLvl] }})</h4>
+                <h4>{{ tasks_context.tasks.lvl[userLvl].task3 }}</h4>
+                <h4>({{ task3_num }}/{{ tasks_context.tasks.inviteAmount[userLvl] }})</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
                 <img :src="invite_icon" class="h-[80%] object-contain"/>
@@ -116,7 +116,7 @@ const task3_num = ref(0)
 
 const GetPromotedBtn = ref(null)
 
-const useLvl = ref(0)
+const userLvl = ref(0)
 
 const tasks_context = ref({
   lvl: ['Farmer','McDonald\'s Intern','Merch','President'],
@@ -150,31 +150,37 @@ const tasks_context = ref({
   },
 })
 
-watch(task1_checked && task2_checked && task3_checked, () => {
-  btnIsDisabled.value = false
+// ============================ computed ============================
+// 升等圖
+const userPic = computed(() => {
+  return '/src/assets/' + tasks_context.value.lvl[userLvl.value] + 'Pic.png'
+})
+const userBG = computed(() => {
+  return '/src/assets/' + tasks_context.value.lvl[userLvl.value] + 'BG.jpg'
+})
+const userNextPic = computed(() => {
+  return '/src/assets/' + tasks_context.value.lvl[userLvl.value +1] + 'Pic.png'
+})
+const userNextBG = computed(() => {
+  return '/src/assets/' + tasks_context.value.lvl[userLvl.value +1] + 'BG.jpg'
+})
+
+// ============================ watch ============================
+
+watch([task1_checked, task2_checked, task3_checked], ([t1, t2, t3]) => {
+  if(t1 && t2 && t3) btnIsDisabled.value = false
 })
 // btn 脈動 anim
 watch(btnIsDisabled, () => {
   // 解開按鈕失效時啟動
   if (!btnIsDisabled.value && GetPromotedBtn.value) animatePulse(GetPromotedBtn.value)
 })
-// 升等圖
-const userPic = computed(() => {
-  return '/src/assets/' + tasks_context.value.lvl[useLvl.value] + 'Pic.png'
-})
-const userBG = computed(() => {
-  return '/src/assets/' + tasks_context.value.lvl[useLvl.value] + 'BG.jpg'
-})
-const userNextPic = computed(() => {
-  return '/src/assets/' + tasks_context.value.lvl[useLvl.value +1] + 'Pic.png'
-})
-const userNextBG = computed(() => {
-  return '/src/assets/' + tasks_context.value.lvl[useLvl.value +1] + 'BG.jpg'
-})
+
+// ============================ onMounted ============================
 
 onMounted(() => {
   // 抓 user 等級、任務完成度
-  useLvl.value = 0
+  userLvl.value = 0
   task1_num.value = 0
   task2_num.value = 0
   task3_num.value = 0
@@ -204,6 +210,8 @@ onMounted(() => {
   })
 })
 
+// ============================ function ============================
+
 function GoToHome() {
   router.push('/')
 }
@@ -220,7 +228,7 @@ function ClickTask2() {
 
 function ClickTask3() {
   task3_checked.value = true
-  task3_num.value = 2
+  task3_num.value = tasks_context.value.tasks.inviteAmount[userLvl.value]
 }
 
 function GetPromoted() {
