@@ -94,7 +94,7 @@
 <script setup lang="ts">
 // 導入 plugin
 import { ref, onMounted, computed, watch } from 'vue';
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import { animate } from 'animejs';
 import { useStore } from '../stores/store'
 import LoadingIcon from 'vue-material-design-icons/Loading.vue';
@@ -108,7 +108,7 @@ import check_icon from '../assets/check_icon.png';
 import back_btn from '../assets/back_btn.png';
 
 const $store = useStore()
-const router = useRouter()
+// const router = useRouter()
 
 const btnIsDisabled = ref(true)
 
@@ -186,7 +186,11 @@ onMounted(() => {
 // ============================ function ============================
 
 function GoToHome() {
-  router.push('/')
+  // router.push('/')
+
+  // 為解決 tg app 之 router 問題
+  $store.isHome = true
+  $store.isTasks = false
 }
 
 function ClickTask1() {
