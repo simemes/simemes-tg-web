@@ -105,7 +105,7 @@ import x_icon from '../assets/x_icon.png';
 import tg_icon from '../assets/tg_icon.png';
 import invite_icon from '../assets/invite_icon.png';
 import check_icon from '../assets/check_icon.png';
-import back_btn from '../assets/back_btn.png';
+// import back_btn from '../assets/back_btn.png';
 
 const $store = useStore()
 // const router = useRouter()
@@ -185,13 +185,13 @@ onMounted(() => {
 
 // ============================ function ============================
 
-function GoToHome() {
-  // router.push('/')
+// function GoToHome() {
+//   // router.push('/')
 
-  // 為解決 tg app 之 router 問題
-  $store.isHome = true
-  $store.isTasks = false
-}
+//   // 為解決 tg app 之 router 問題
+//   $store.isHome = true
+//   $store.isTasks = false
+// }
 
 function ClickTask1() {
   task1_loading.value = true
