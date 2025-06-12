@@ -3,11 +3,11 @@
     <img :src="goldBackground3" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <!-- fadein anim -->
       <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border fadein">
-        <div class="absolute top-0 left-0 p-5">
+        <div class="absolute top-0 left-0 p-5 z-10">
           <img :src="back_btn" @click="GoToHome" class="back-btn btn-click">
         </div>
         <!-- Get Promoted 示意區 -->
-        <div class="section bottom-1/2 px-5">
+        <div class="section bottom-[52%] px-5">
           <h2>{{ $store.tasks_context.getPromote.title }}</h2>
           <!-- 半透明遮罩區 -->
           <div class="relative h-[224px] w-full py-[15px] bg-black/50 rounded-2xl overflow-hidden mt-3">
@@ -42,7 +42,7 @@
         </div>
 
         <!-- task 區 -->
-        <div class="section top-1/2 px-5">
+        <div class="section top-[47%] px-5">
           <h4>{{ $store.tasks_context.tasks.title }}</h4>
           <div v-if="$store.tasks_context.tasks.lvl[$store.userLvl]" class="relative w-full z-0 mt-3">
             <!-- 1st -->

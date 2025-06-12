@@ -1,17 +1,17 @@
 <template>
   <main class="w-full overflow-hidden">
     <img :src="FarmerBG" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
-    <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border">
+    <div class="flex flex-col justify-start items-center min-h-screen pt-[10%] pb-5 mx-auto relative box-border">
       <!-- SIMemes Logo -->
       <div class="section logo">
         <img :src="sim_logo" class="max-w-1/2 block mx-auto"/>
       </div>
       <!-- player avatar -->
-      <div class="section top-1/4 -z-10 avatar ava-fadein">
+      <div class="section bottom-[51%] -z-10 avatar ava-fadein">
         <img :src="farmerGmove" class="max-w-[40%] w-[186px] h-[154px] object-contain block mx-auto"/>
       </div>
       
-      <div class="section top-1/2 translate-context">
+      <div class="section translate-context" :class="{ 'bottom-[42%]': $store.isJoin, 'top-[47%]': !$store.isJoin}">
         <!-- join -->
         <div v-if="!$store.isJoin && !$store.isClaim">
           <h2>{{ $store.home_context.join.title }}</h2>
