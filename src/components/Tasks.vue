@@ -3,9 +3,9 @@
     <img :src="goldBackground3" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <!-- fadein anim -->
       <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border fadein">
-        <div class="absolute top-0 left-0 p-5 z-10">
+        <!-- <div class="absolute top-0 left-0 p-5 z-10">
           <img :src="back_btn" @click="GoToHome" class="back-btn btn-click">
-        </div>
+        </div> -->
         <!-- Get Promoted 示意區 -->
         <div class="section bottom-[52%] px-5">
           <h2>{{ $store.tasks_context.getPromote.title }}</h2>
