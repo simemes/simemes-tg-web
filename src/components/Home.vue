@@ -1,9 +1,9 @@
 <template>
   <main class="w-full overflow-hidden">
     <img :src="FarmerBG" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
-    <div class="flex flex-col justify-start items-center min-h-screen pt-[10%] pb-5 mx-auto relative box-border">
+    <div class="flex flex-col justify-start items-center min-h-screen pb-5 mx-auto relative box-border">
       <!-- SIMemes Logo -->
-      <div class="section logo">
+      <div class="section logo mt-[13%]">
         <img :src="sim_logo" class="max-w-1/2 block mx-auto"/>
       </div>
       <!-- player avatar -->
@@ -13,16 +13,16 @@
       
       <div class="section translate-context" :class="{ 'bottom-[42%]': $store.isJoin, 'top-[47%]': !$store.isJoin}">
         <!-- join -->
-        <div v-if="!$store.isJoin && !$store.isClaim">
-          <h2>{{ $store.home_context.join.title }}</h2>
-          <h4 class="w-50 text-[14px]">{{ $store.home_context.join.txt }}</h4>
+        <div v-if="!$store.isJoin && !$store.isClaim" class="my-5">
+          <h2 class="mb-2 text-[24px]">{{ $store.home_context.join.title }}</h2>
+          <h4 class="w-50 text-[16px] mx-auto">{{ $store.home_context.join.txt }}</h4>
         </div>
         <button @click="Join" class="btn btn-click type1 m-[10px]" v-if="!$store.isJoin" ref="joinBtn">{{ $store.home_context.join.btn }}</button>
         <!-- 已經 join 時顯示 -->
         <div v-if="$store.isJoin">
-          <h2>{{ $store.home_context.join.isJoinTitle }}</h2>
-          <h4 v-if="!$store.isClaim" class="w-50 text-[14px]">{{ $store.home_context.join.isJoinTxt }}</h4>
-          <h4 v-if="$store.isClaim" class="w-50 text-[14px]">{{ $store.home_context.join.isClaimTxt }}</h4>
+          <h2 class=" text-[24px]">{{ $store.home_context.join.isJoinTitle }}</h2>
+          <h4 v-if="!$store.isClaim" class="w-50 text-[16px]">{{ $store.home_context.join.isJoinTxt }}</h4>
+          <h4 v-if="$store.isClaim" class="w-50 text-[16px]">{{ $store.home_context.join.isClaimTxt }}</h4>
         </div>
       </div>
       
