@@ -222,7 +222,12 @@ function GetPromoted() {
   $store.task1_num = 0
   $store.task2_num = 0
   $store.task3_num = 0
-  router.push('/')
+
+  // router.push('/')
+  
+  // 為解決 tg app 之 router 問題
+  $store.isHome = true
+  $store.isTasks = false
 }
 
 function animatePulse(target: HTMLElement | null) {

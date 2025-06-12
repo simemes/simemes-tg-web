@@ -2,6 +2,10 @@ import { defineStore } from 'pinia'
 
 export const useStore = defineStore('store', {
   state: () => ({
+    // isHome、isTasks 為解決 tg app 之 router 問題
+    isHome: true,
+    isTasks: false,
+
     userLvl: 0,
     isJoin: false,
     isClaim: false,

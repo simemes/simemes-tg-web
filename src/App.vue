@@ -1,9 +1,19 @@
 <template>
-  <router-view />
+  <!-- <router-view /> -->
+
+  <!-- 為解決 tg app 之 router 問題 -->
+  <Home v-if="$store.isHome" />
+  <Tasks v-if="$store.isTasks" />
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
+
+// 為解決 tg app 之 router 問題
+import { useStore } from './stores/store'
+import Home from './components/Home.vue'
+import Tasks from './components/Tasks.vue'
+const $store = useStore()
 
 onMounted(() => {
   const tg = (window as any).Telegram?.WebApp;
