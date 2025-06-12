@@ -60,7 +60,7 @@
 <script setup lang="ts">
 // 導入 plugin
 import { ref, onMounted, computed, watch } from 'vue';
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import { animate, createSpring } from 'animejs';
 import { useStore } from '../stores/store'
 // 導入 assets
@@ -70,7 +70,7 @@ import drink from '../assets/drink.png';
 import sim_logo from '../assets/sim_logo.png';
 
 const $store = useStore()
-const router = useRouter()
+// const router = useRouter()
 
 // 動畫 ref
 const picRotate = ref(null)
