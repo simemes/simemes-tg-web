@@ -3,6 +3,13 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  const tg = (window as any).Telegram?.WebApp;
+  tg.expand(); // 全螢幕
+  // tg.showAlert("Hello from Telegram Mini App");
+})
 </script>
 
 <style>

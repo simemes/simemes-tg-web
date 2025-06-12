@@ -122,21 +122,20 @@ const task3_loading = ref(false)
 
 // 動畫 ref
 const GetPromotedBtn = ref(null)
-const loadingIcon = ref(null)
 
 // ============================ computed ============================
 // 升等圖
 const userPic = computed(() => {
-  return '/src/assets/' + $store.tasks_context.lvlist[$store.userLvl] + 'Pic.png'
+  return new URL(`../assets/${$store.tasks_context.lvlist[$store.userLvl]}Pic.png`, import.meta.url).href
 })
 const userBG = computed(() => {
-  return '/src/assets/' + $store.tasks_context.lvlist[$store.userLvl] + 'BG.jpg'
+  return new URL(`../assets/${$store.tasks_context.lvlist[$store.userLvl]}BG.jpg`, import.meta.url).href
 })
 const userNextPic = computed(() => {
-  return '/src/assets/' + $store.tasks_context.lvlist[$store.userLvl +1] + 'Pic.png'
+  return new URL(`../assets/${$store.tasks_context.lvlist[$store.userLvl +1]}Pic.png`, import.meta.url).href
 })
 const userNextBG = computed(() => {
-  return '/src/assets/' + $store.tasks_context.lvlist[$store.userLvl +1] + 'BG.jpg'
+  return new URL(`../assets/${$store.tasks_context.lvlist[$store.userLvl +1]}BG.jpg`, import.meta.url).href
 })
 
 // ============================ watch ============================

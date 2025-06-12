@@ -81,10 +81,11 @@ const joinBtn = ref(null)
 // ============================ computed ============================
 // 升等圖
 const userPic = computed(() => {
-  return '/src/assets/' + $store.home_context.lvl[$store.userLvl] + 'Pic.png'
+  // return '/src/assets/' + $store.home_context.lvl[$store.userLvl] + 'Pic.png'
+  return new URL(`../assets/${$store.home_context.lvl[$store.userLvl]}Pic.png`, import.meta.url).href
 })
 const userBG = computed(() => {
-  return '/src/assets/' + $store.home_context.lvl[$store.userLvl] + 'BG.jpg'
+  return new URL(`../assets/${$store.home_context.lvl[$store.userLvl]}BG.jpg`, import.meta.url).href
 })
 
 // ============================ watch ============================
