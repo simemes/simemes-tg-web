@@ -17,8 +17,9 @@ const $store = useStore()
 
 onMounted(() => {
   const tg = (window as any).Telegram?.WebApp;
-  tg.expand(); // 全螢幕
-  // tg.showAlert("Hello from Telegram Mini App");
+  tg.expand();
+  tg.requestFullscreen();
+  tg.lockOrientation("portrait");
 })
 </script>
 
