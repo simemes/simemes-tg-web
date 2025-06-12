@@ -235,7 +235,11 @@ function animatePulse(target: HTMLElement | null) {
 
 // ============= 切換 Tasks 頁面 =============
 function GoToTasks() {
-  router.push('/tasks')
+  // router.push('/tasks')
+
+  // 為解決 tg app 之 router 問題
+  $store.isHome = false
+  $store.isTasks = true
 }
 
 </script>
