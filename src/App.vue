@@ -15,13 +15,43 @@ import Home from './components/Home.vue'
 import Tasks from './components/Tasks.vue'
 const $store = useStore()
 
+// 作業系統
+const getOS = () => {
+  const userAgent = window.navigator.userAgent;
+  if (/windows phone/i.test(userAgent)) {
+    return "Windows Phone";
+  }
+  if (/win/i.test(userAgent)) {
+    return "Windows";
+  }
+  if (/android/i.test(userAgent)) {
+    return "Android";
+  }
+  if (/iPad|iPhone|iPod/.test(userAgent)) {
+    return "iOS";
+  }
+  if (/Macintosh/.test(userAgent)) {
+    return "macOS";
+  }
+  if (/Linux/.test(userAgent)) {
+    return "Linux";
+  }
+  return "Unknown";
+}
+
 onMounted(() => {
   try {
     const tg = (window as any).Telegram?.WebApp;
     tg.expand();
-    tg.requestFullscreen();
     tg.lockOrientation("portrait");
     // tg.showAlert("alert");
+
+    // 若是 mobile 就滿版
+    if (getOS() == 'iOS' || getOS() == 'Android' || getOS() == 'Windows Phone') {
+      console.log("作業系統是:", getOS(), " requestFullscreen");
+      tg.requestFullscreen();
+    }
+    
   } catch (error) {
     console.error('mounted error:', error);
   }
