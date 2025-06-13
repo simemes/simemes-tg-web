@@ -9,8 +9,8 @@
     <img :src="FarmerBG" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <div class="flex flex-col justify-start items-center min-h-screen pb-5 mx-auto relative box-border">
       <!-- SIMemes Logo -->
-      <div class="section logo mt-[13%]">
-        <img :src="sim_logo" class="max-w-1/2 block mx-auto"/>
+      <div class="section logo mt-[13%] md:mt-[5%]">
+        <img :src="sim_logo" class="w-1/2 max-w-[300px] block mx-auto"/>
       </div>
       <!-- player avatar -->
       <div class="section bottom-[51%] -z-10 avatar ava-fadein">
