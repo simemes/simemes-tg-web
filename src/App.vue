@@ -30,6 +30,7 @@ onMounted(() => {
 .section {
   @apply absolute flex flex-col justify-center items-center w-full text-center font-[Impact,Charcoal,sans-serif] mb-[20px];
   @apply [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000];
+  color: white;
 }
 
 .card {
