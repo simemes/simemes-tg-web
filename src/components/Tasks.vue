@@ -1,5 +1,11 @@
 <template>
   <main class="w-full overflow-hidden">
+
+    <!-- 預載入圖片後遮罩消失 -->
+    <transition leave-active-class="transition duration-0 ease-in" leave-from-class="opacity-100" leave-to-class="opacity-0">
+      <div v-if="!isLoaded" class="absolute w-full h-full bg-black z-1"></div>
+    </transition>
+    
     <img :src="goldBackground3" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <!-- fadein anim -->
       <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border fadein">
@@ -123,6 +129,19 @@ const task3_loading = ref(false)
 // 動畫 ref
 const GetPromotedBtn = ref(null)
 
+// 預載入圖片
+const isLoaded = ref(false)
+const imageList: string[] = [
+  '/src/assets/FarmerPic.png',
+  '/src/assets/McDonald\'s InternPic.png',
+  '/src/assets/MerchPic.png',
+  '/src/assets/PresidentPic.png',
+  '/src/assets/FarmerBG.jpg',
+  '/src/assets/McDonald\'s InternBG.jpg',
+  '/src/assets/MerchBG.jpg',
+  '/src/assets/PresidentBG.jpg',
+];
+
 // ============================ computed ============================
 // 升等圖
 const userPic = computed(() => {
@@ -151,7 +170,11 @@ watch(btnIsDisabled, () => {
 
 // ============================ onMounted ============================
 
-onMounted(() => {
+onMounted(async() => {
+  // 預載入圖片
+  await preloadImages(imageList);
+  isLoaded.value = true;
+
   // 抓 user 等級、任務完成度
   // $store.userLvl = 0
   // $store.task1_num = 0
@@ -245,6 +268,21 @@ function animatePulse(target: HTMLElement | null) {
     ],
     loop: true,
   })
+}
+// 預載入圖片
+function preloadImages(imageUrls: string[]) {
+  console.log("preloadImages")
+  return Promise.all(
+    imageUrls.map(
+      (src) =>
+        new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = resolve;
+          img.onerror = reject;
+        })
+    )
+  );
 }
 
 </script>
