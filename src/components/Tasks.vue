@@ -6,7 +6,7 @@
       <div v-if="!isLoaded" class="absolute w-full h-full bg-black z-1"></div>
     </transition>
     
-    <img :src="goldBackground3" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
+    <img src="/images/goldBackground3.jpg" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <!-- fadein anim -->
       <div class="flex flex-col justify-start items-center min-h-screen pt-[60px] pb-5 mx-auto relative box-border fadein">
         <!-- <div class="absolute top-0 left-0 p-5 z-10">
@@ -29,7 +29,7 @@
 
               <!-- arrow anim -->
               <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 arrow-anim">
-                <img :src="arrow_icon" class="w-full h-full object-contain"/>
+                <img src="/images/arrow_icon.png" class="w-full h-full object-contain"/>
               </div>
               <div>
                 <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden" :class="`border-shadow-lvl${$store.userLvl + 1}`">
@@ -58,10 +58,10 @@
                 <h4>({{ $store.task1_num }}/1)</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
-                <img :src="x_icon" class="h-[80%] object-contain"/>
+                <img src="/images/x_icon.png" class="h-[80%] object-contain"/>
                 <button v-if="!task1_checked && !task1_loading" class="btn btn-click type2" @click="ClickTask1">{{ $store.tasks_context.tasks.followBtn }}</button>
                 <LoadingIcon v-if="task1_loading" class="animate-spin mx-8" />
-                <img v-if="task1_checked" :src="check_icon" class="h-[80%] object-contain"/>
+                <img v-if="task1_checked" src="/images/check_icon.png" class="h-[80%] object-contain"/>
               </div>
             </div>
             <!-- 2nd -->
@@ -71,10 +71,10 @@
                 <h4>({{ $store.task2_num }}/1)</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
-                <img :src="tg_icon" class="h-[80%] object-contain"/>
+                <img src="/images/tg_icon.png" class="h-[80%] object-contain"/>
                 <button v-if="!task2_checked && !task2_loading" class="btn btn-click type2" @click="ClickTask2">{{ $store.tasks_context.tasks.followBtn }}</button>
                 <LoadingIcon v-if="task2_loading" class="animate-spin mx-8" />
-                <img v-if="task2_checked" :src="check_icon" class="h-[80%] object-contain"/>
+                <img v-if="task2_checked" src="/images/check_icon.png" class="h-[80%] object-contain"/>
               </div>
             </div>
             <!-- 3th -->
@@ -84,10 +84,10 @@
                 <h4>({{ $store.task3_num }}/{{ $store.tasks_context.tasks.inviteAmount[$store.userLvl] }})</h4>
               </div>
               <div class="h-[70%] flex justify-between items-center px-3">
-                <img :src="invite_icon" class="h-[80%] object-contain"/>
+                <img src="/images/invite_icon.png" class="h-[80%] object-contain"/>
                 <button v-if="!task3_checked && !task3_loading" class="btn btn-click type2" @click="ClickTask3">{{ $store.tasks_context.tasks.inviteBtn }}</button>
                 <LoadingIcon v-if="task3_loading" class="animate-spin mx-8" />
-                <img v-if="task3_checked" :src="check_icon" class="h-[80%] object-contain"/>
+                <img v-if="task3_checked" src="/images/check_icon.png" class="h-[80%] object-contain"/>
               </div>
             </div>
           </div>
@@ -104,14 +104,6 @@ import { ref, onMounted, computed, watch } from 'vue';
 import { animate } from 'animejs';
 import { useStore } from '../stores/store'
 import LoadingIcon from 'vue-material-design-icons/Loading.vue';
-// 導入素材
-import goldBackground3 from '../assets/goldBackground3.jpg';
-import arrow_icon from '../assets/arrow_icon.png';
-import x_icon from '../assets/x_icon.png';
-import tg_icon from '../assets/tg_icon.png';
-import invite_icon from '../assets/invite_icon.png';
-import check_icon from '../assets/check_icon.png';
-// import back_btn from '../assets/back_btn.png';
 
 const $store = useStore()
 // const router = useRouter()
@@ -132,29 +124,29 @@ const GetPromotedBtn = ref(null)
 // 預載入圖片
 const isLoaded = ref(false)
 const imageList: string[] = [
-  '/src/assets/FarmerPic.png',
-  '/src/assets/McDonald\'s InternPic.png',
-  '/src/assets/MerchPic.png',
-  '/src/assets/PresidentPic.png',
-  '/src/assets/FarmerBG.jpg',
-  '/src/assets/McDonald\'s InternBG.jpg',
-  '/src/assets/MerchBG.jpg',
-  '/src/assets/PresidentBG.jpg',
+  '/images/FarmerPic.png',
+  '/images/McDonald\'s InternPic.png',
+  '/images/MerchPic.png',
+  '/images/PresidentPic.png',
+  '/images/FarmerBG.jpg',
+  '/images/McDonald\'s InternBG.jpg',
+  '/images/MerchBG.jpg',
+  '/images/PresidentBG.jpg',
 ];
 
 // ============================ computed ============================
 // 升等圖
 const userPic = computed(() => {
-  return new URL(`../assets/${$store.tasks_context.lvlist[$store.userLvl]}Pic.png`, import.meta.url).href
+  return `/images/${$store.tasks_context.lvlist[$store.userLvl]}Pic.png`
 })
 const userBG = computed(() => {
-  return new URL(`../assets/${$store.tasks_context.lvlist[$store.userLvl]}BG.jpg`, import.meta.url).href
+  return `/images/${$store.tasks_context.lvlist[$store.userLvl]}BG.jpg`
 })
 const userNextPic = computed(() => {
-  return new URL(`../assets/${$store.tasks_context.lvlist[$store.userLvl +1]}Pic.png`, import.meta.url).href
+  return `/images/${$store.tasks_context.lvlist[$store.userLvl +1]}Pic.png`
 })
 const userNextBG = computed(() => {
-  return new URL(`../assets/${$store.tasks_context.lvlist[$store.userLvl +1]}BG.jpg`, import.meta.url).href
+  return `/images/${$store.tasks_context.lvlist[$store.userLvl +1]}BG.jpg`
 })
 
 // ============================ watch ============================

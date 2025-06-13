@@ -6,15 +6,15 @@
       <div v-if="!isLoaded" class="absolute w-full h-full bg-black z-1"></div>
     </transition>
 
-    <img :src="FarmerBG" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
+    <img src="/images/FarmerBG.jpg" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <div class="flex flex-col justify-start items-center min-h-screen pb-5 mx-auto relative box-border">
       <!-- SIMemes Logo -->
       <div class="section logo mt-[13%] md:mt-[5%]">
-        <img :src="sim_logo" class="w-1/2 max-w-[300px] block mx-auto"/>
+        <img src="/images/sim_logo.png" class="w-1/2 max-w-[300px] block mx-auto"/>
       </div>
       <!-- player avatar -->
       <div class="section bottom-[51%] -z-10 avatar ava-fadein">
-        <img :src="farmerGmove" class="max-w-[40%] w-[186px] h-[154px] object-contain block mx-auto"/>
+        <img src="/images/farmerGmove.png" class="max-w-[40%] w-[186px] h-[154px] object-contain block mx-auto"/>
       </div>
       
       <div class="section translate-context" :class="{ 'bottom-[42%]': $store.isJoin, 'top-[47%]': !$store.isJoin}">
@@ -40,7 +40,7 @@
             <div v-if="!$store.isClaim">
               <h4>{{ $store.home_context.claim.title }}</h4>
               <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
-                <img :src="drink" class="w-full h-full object-contain" ref="picRotate" />
+                <img src="/images/drink.png" class="w-full h-full object-contain" ref="picRotate" />
               </div>
             </div>
            </transition>
@@ -69,11 +69,6 @@ import { ref, onMounted, computed, watch } from 'vue';
 // import { useRouter } from 'vue-router'
 import { animate, createSpring } from 'animejs';
 import { useStore } from '../stores/store'
-// 導入 assets
-import FarmerBG from '../assets/FarmerBG.jpg';
-import farmerGmove from '../assets/farmerGmove.png';
-import drink from '../assets/drink.png';
-import sim_logo from '../assets/sim_logo.png';
 
 const $store = useStore()
 // const router = useRouter()
@@ -87,18 +82,17 @@ const joinBtn = ref(null)
 // 預載入圖片
 const isLoaded = ref(false)
 const imageList: string[] = [
-  '/src/assets/FarmerPic.png',
-  '/src/assets/FarmerBG.jpg',
+  '/images/FarmerPic.png',
+  '/images/FarmerBG.jpg',
 ];
 
 // ============================ computed ============================
 // 升等圖
 const userPic = computed(() => {
-  // return '/src/assets/' + $store.home_context.lvl[$store.userLvl] + 'Pic.png'
-  return new URL(`../assets/${$store.home_context.lvl[$store.userLvl]}Pic.png`, import.meta.url).href
+  return `/images/${$store.home_context.lvl[$store.userLvl]}Pic.png`
 })
 const userBG = computed(() => {
-  return new URL(`../assets/${$store.home_context.lvl[$store.userLvl]}BG.jpg`, import.meta.url).href
+  return `/images/${$store.home_context.lvl[$store.userLvl]}BG.jpg`
 })
 
 // ============================ watch ============================
