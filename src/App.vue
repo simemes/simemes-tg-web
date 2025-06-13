@@ -16,11 +16,15 @@ import Tasks from './components/Tasks.vue'
 const $store = useStore()
 
 onMounted(() => {
-  const tg = (window as any).Telegram?.WebApp;
-  tg.expand();
-  tg.requestFullscreen();
-  tg.lockOrientation("portrait");
-  // tg.showAlert("alert");
+  try {
+    const tg = (window as any).Telegram?.WebApp;
+    tg.expand();
+    tg.requestFullscreen();
+    tg.lockOrientation("portrait");
+    // tg.showAlert("alert");
+  } catch (error) {
+    console.error('mounted error:', error);
+  }
 })
 </script>
 
