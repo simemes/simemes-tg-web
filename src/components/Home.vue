@@ -1,5 +1,11 @@
 <template>
   <main class="w-full overflow-hidden">
+
+    <!-- 預載入圖片後遮罩消失 -->
+    <transition leave-active-class="transition duration-0 ease-in" leave-from-class="opacity-100" leave-to-class="opacity-0">
+      <div v-if="!isLoaded" class="absolute w-full h-full bg-black z-1"></div>
+    </transition>
+
     <img :src="FarmerBG" class="absolute top-0 left-0 w-full h-full object-cover -z-10"/>
     <div class="flex flex-col justify-start items-center min-h-screen pb-5 mx-auto relative box-border">
       <!-- SIMemes Logo -->
@@ -78,6 +84,13 @@ const claimBtnTrans = ref(null)
 const upgradeBtnTrans = ref(null)
 const joinBtn = ref(null)
 
+// 預載入圖片
+const isLoaded = ref(false)
+const imageList: string[] = [
+  '/src/assets/FarmerPic.png',
+  '/src/assets/FarmerBG.jpg',
+];
+
 // ============================ computed ============================
 // 升等圖
 const userPic = computed(() => {
@@ -142,7 +155,11 @@ watch(upgradeBtnTrans, () => {
 
 // ============================ onMounted ============================
 
-onMounted(() => {
+onMounted(async() => {
+  // 預載入圖片
+  await preloadImages(imageList);
+  isLoaded.value = true;
+
   // 抓 user 等級
   // $store.userLvl = 0
   // $store.isJoin = true
@@ -240,6 +257,21 @@ function GoToTasks() {
   // 為解決 tg app 之 router 問題
   $store.isHome = false
   $store.isTasks = true
+}
+// 預載入圖片
+function preloadImages(imageUrls: string[]) {
+  console.log("preloadImages")
+  return Promise.all(
+    imageUrls.map(
+      (src) =>
+        new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = resolve;
+          img.onerror = reject;
+        })
+    )
+  );
 }
 
 </script>
