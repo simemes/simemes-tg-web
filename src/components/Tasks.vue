@@ -36,7 +36,7 @@
             </div>
           </div>
           <!-- btn -->
-          <div class="absolute bottom-[10px] w-full translate-btn">
+          <div class="absolute bottom-[10px] w-full">
             <button @click="GetPromoted" class="btn type1" :class="{ disabled: btnIsDisabled, 'btn-click': !btnIsDisabled}" :disabled="btnIsDisabled" ref="GetPromotedBtn">{{ $store.tasks_context.getPromote.btn }}</button>
           </div>
         </div>

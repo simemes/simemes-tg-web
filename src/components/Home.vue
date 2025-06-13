@@ -51,7 +51,7 @@
           </div>
         </div>
         <button v-if="$store.isJoin && !$store.isClaim" @click="Claim" class="btn btn-click type1 absolute bottom-[10px]" ref="claimBtnTrans">{{ $store.home_context.claim.btn }}</button>
-        <button v-if="$store.isJoin && $store.isClaim && $store.userLvl < 3" @click="GoToTasks" class="btn btn-click type1 absolute bottom-[10px] translate-btn" ref="upgradeBtnTrans">{{ $store.home_context.upgrade.btn }}</button>
+        <button v-if="$store.isJoin && $store.isClaim && $store.userLvl < 3" @click="GoToTasks" class="btn btn-click type1 absolute bottom-[10px]" ref="upgradeBtnTrans">{{ $store.home_context.upgrade.btn }}</button>
       </div>
     </div>
   </main>
