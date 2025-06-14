@@ -62,7 +62,24 @@ onMounted(() => {
 
 <style>
 /* ==================== Home Page ==================== */
+@media screen and (orientation: landscape) {
+  body::before {
+    content: "Please rotate your device to portrait mode.";
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: white;
+    color: black;
+    font-size: 24px;
+    z-index: 9999;
+    text-align: center;
+    padding-top: 40vh;
+  }
 
+  #app {
+    display: none;
+  }
+}
 .section {
   @apply absolute flex flex-col justify-center items-center w-full text-center font-[Impact,Charcoal,sans-serif] mb-[20px];
   @apply [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000];
