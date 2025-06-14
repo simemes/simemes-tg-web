@@ -18,6 +18,7 @@ const $store = useStore()
 // 作業系統
 const getOS = () => {
   const userAgent = window.navigator.userAgent;
+  const isTouch = 'ontouchstart' in window;
   if (/windows phone/i.test(userAgent)) {
     return "Windows Phone";
   }
@@ -31,7 +32,8 @@ const getOS = () => {
     return "iOS";
   }
   if (/Macintosh/.test(userAgent)) {
-    return "macOS";
+    // 若是 Mac，但支援觸控，基本上就是 iPad 偽裝成桌面
+    return isTouch ? "iPadOS" : "macOS";
   }
   if (/Linux/.test(userAgent)) {
     return "Linux";
@@ -47,9 +49,9 @@ onMounted(() => {
     // tg.showAlert("alert");
 
     // 若是 mobile 就滿版
-    if (getOS() == 'iOS' || getOS() == 'Android' || getOS() == 'Windows Phone') {
-      console.log("作業系統是:", getOS(), " requestFullscreen");
+    if (getOS() == 'iOS' || getOS() == 'Android' || getOS() == 'Windows Phone' || getOS() == 'iPadOS') {
       tg.requestFullscreen();
+      console.log("作業系統是:", getOS(), " requestFullscreen");
     }
     
   } catch (error) {
