@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen flex items-center justify-center">
+  <div class="w-full h-full flex items-center justify-center">
     <!-- <router-view /> -->
 
     <!-- 為解決 tg app 之 router 問題 -->
@@ -65,6 +65,9 @@ onMounted(() => {
 </script>
 
 <style>
+#app {
+
+}
 /* ==================== Home Page ==================== */
 @media screen and (orientation: landscape) {
   .landscape-screen {
