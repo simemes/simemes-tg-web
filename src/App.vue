@@ -3,6 +3,8 @@
     <!-- <router-view /> -->
 
     <!-- 為解決 tg app 之 router 問題 -->
+    <img v-if="$store.isHome" src="/images/FarmerBG.jpg" alt="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-md saturate-60 brightness-80">
+    <img v-if="$store.isTasks" src="/images/goldBackground3.jpg" alt="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-md saturate-60 brightness-80">
     <Home v-if="$store.isHome" class="landscape-screen"/>
     <Tasks v-if="$store.isTasks" class="landscape-screen"/>
   </div>
@@ -68,6 +70,8 @@ onMounted(() => {
   .landscape-screen {
     @apply relative;
     width: calc(100vh * 9 / 16);
+    box-shadow: 0 0 30px black;
+    border-radius: 12px;
   }
 }
 .section {
