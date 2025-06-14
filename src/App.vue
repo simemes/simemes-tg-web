@@ -1,9 +1,13 @@
 <template>
-  <!-- <router-view /> -->
+  <div class="w-screen h-screen flex items-center justify-center">
+    <!-- <router-view /> -->
 
-  <!-- 為解決 tg app 之 router 問題 -->
-  <Home v-if="$store.isHome" />
-  <Tasks v-if="$store.isTasks" />
+    <!-- 為解決 tg app 之 router 問題 -->
+    <img v-if="$store.isHome" src="/images/FarmerBG.jpg" alt="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-md saturate-60 brightness-80">
+    <img v-if="$store.isTasks" src="/images/goldBackground3.jpg" alt="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-md saturate-60 brightness-80">
+    <Home v-if="$store.isHome" class="landscape-screen"/>
+    <Tasks v-if="$store.isTasks" class="landscape-screen"/>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -62,7 +66,14 @@ onMounted(() => {
 
 <style>
 /* ==================== Home Page ==================== */
-
+@media screen and (orientation: landscape) {
+  .landscape-screen {
+    @apply relative;
+    width: calc(100vh * 9 / 16);
+    box-shadow: 0 0 30px black;
+    border-radius: 12px;
+  }
+}
 .section {
   @apply absolute flex flex-col justify-center items-center w-full text-center font-[Impact,Charcoal,sans-serif] mb-[20px];
   @apply [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000];
