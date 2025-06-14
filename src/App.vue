@@ -1,9 +1,11 @@
 <template>
-  <!-- <router-view /> -->
+  <div class="w-screen h-screen flex items-center justify-center">
+    <!-- <router-view /> -->
 
-  <!-- 為解決 tg app 之 router 問題 -->
-  <Home v-if="$store.isHome" />
-  <Tasks v-if="$store.isTasks" />
+    <!-- 為解決 tg app 之 router 問題 -->
+    <Home v-if="$store.isHome" class="landscape-screen"/>
+    <Tasks v-if="$store.isTasks" class="landscape-screen"/>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -63,21 +65,9 @@ onMounted(() => {
 <style>
 /* ==================== Home Page ==================== */
 @media screen and (orientation: landscape) {
-  body::before {
-    content: "Please rotate your device to portrait mode.";
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: white;
-    color: black;
-    font-size: 24px;
-    z-index: 9999;
-    text-align: center;
-    padding-top: 40vh;
-  }
-
-  #app {
-    display: none;
+  .landscape-screen {
+    @apply relative;
+    width: calc(100vh * 9 / 16);
   }
 }
 .section {
