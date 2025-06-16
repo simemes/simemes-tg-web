@@ -65,9 +65,11 @@ onMounted(() => {
 </script>
 
 <style>
-#app {
 
+.will-change-transform {
+  will-change: transform;
 }
+
 /* ==================== Home Page ==================== */
 @media screen and (orientation: landscape) {
   .landscape-screen {

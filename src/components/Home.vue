@@ -40,7 +40,7 @@
             <div v-if="!$store.isClaim">
               <h4>{{ $store.home_context.claim.title }}</h4>
               <div class="relative w-[80px] h-[80px] mx-auto mt-5 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden">
-                <img src="/images/drink.png" class="w-full h-full object-contain" ref="picRotate" />
+                <img src="/images/drink.png" class="will-change-transform w-full h-full object-contain" ref="picRotate" />
               </div>
             </div>
            </transition>
@@ -50,7 +50,7 @@
               <h4>{{ $store.home_context.upgrade.title }}</h4>
               <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden" :class="`border-shadow-lvl${$store.userLvl}`">
                 <img :src="userBG" class="absolute" />
-                <img :src="userPic" class="relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
+                <img :src="userPic" class="will-change-transform relative -ml-1 mt-3 w-full h-full object-contain" ref="picRotate"/>
               </div>
               <h4 class="lvl-name">{{ $store.home_context.lvl[$store.userLvl] }}</h4>
             </div>

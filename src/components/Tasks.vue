@@ -22,7 +22,7 @@
                 <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden" :class="`border-shadow-lvl${$store.userLvl}`">
                   <img :src="userBG" class="absolute" />
                   <!-- pic rotate anim -->
-                  <img :src="userPic" class="relative -ml-1 mt-3 w-full h-full object-contain pic-rotate"/>
+                  <img :src="userPic" class="will-change-transform relative -ml-1 mt-3 w-full h-full object-contain pic-rotate"/>
                 </div>
                 <h4 class="lvl-name">{{ $store.tasks_context.lvlist[$store.userLvl] }}</h4>
               </div>
@@ -35,7 +35,7 @@
                 <div class="relative w-[80px] h-[80px] mx-auto mt-2 mb-2 border border-[#FFCE00] rounded-2xl shadow-[0px_0px_8px_0px_#FBC222] overflow-hidden" :class="`border-shadow-lvl${$store.userLvl + 1}`">
                   <img :src="userNextBG" class="absolute" />
                   <!-- pic rotate anim -->
-                  <img :src="userNextPic" class="relative -ml-1 mt-3 w-full h-full object-contain pic-rotate"/>
+                  <img :src="userNextPic" class="will-change-transform relative -ml-1 mt-3 w-full h-full object-contain pic-rotate"/>
                 </div>
                 <h4 class="lvl-name">{{ $store.tasks_context.lvlist[$store.userLvl + 1] }}</h4>
               </div>
