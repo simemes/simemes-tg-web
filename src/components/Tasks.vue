@@ -263,7 +263,7 @@ function animatePulse(target: HTMLElement | null) {
 }
 // 預載入圖片
 function preloadImages(imageUrls: string[]) {
-  console.log("preloadImages")
+  console.log("[pre-register]: preloadImages from Tasks ...")
   return Promise.all(
     imageUrls.map(
       (src) =>
