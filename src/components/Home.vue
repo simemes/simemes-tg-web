@@ -248,7 +248,7 @@ function animatePulse(target: HTMLElement | null) {
 function GoToTasks() {
   router.push('/tasks')
 
-  // 為解決 tg app 之 router 問題
+  // 切換寬版的模糊背景
   $store.isHome = false
   $store.isTasks = true
 }
