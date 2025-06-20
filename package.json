@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.8",
+    "@telegram-apps/sdk": "^3.10.1",
+    "@telegram-apps/sdk-vue": "^2.0.25",
     "@vitejs/plugin-legacy": "^6.1.1",
     "animejs": "^4.0.2",
     "axios": "^1.9.0",

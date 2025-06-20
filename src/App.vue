@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import { init,postEvent } from '@telegram-apps/sdk';
 
 // 為解決 tg app 之 router 問題
 import { useStore } from './stores/store'
@@ -46,21 +47,32 @@ const getOS = () => {
 }
 
 onMounted(() => {
-  try {
-    const tg = (window as any).Telegram?.WebApp;
-    tg.expand();
-    tg.lockOrientation("portrait");
-    // tg.showAlert("alert");
 
+  // 從 <script src="https://telegram.org/js/telegram-web-app.js"> 引入的 sdk
+  // 目前抓 userinfo 只能從這裡
+  try {
+    const tg = (window as any).Telegram.WebApp;
+    const user = tg.initDataUnsafe?.user;
+    console.log("[Telegram.WebApp] - user: ", user);
+  }
+  catch (error) {
+    console.log("[Telegram.WebApp]: ", error);
+  }
+
+  try {
+    // 初始化 @telegram-apps/sdk-vue
+    init();
+    postEvent('web_app_expand')
+    postEvent('web_app_toggle_orientation_lock', { locked: true })
     // 若是 mobile 就滿版
     if (getOS() == 'iOS' || getOS() == 'Android' || getOS() == 'Windows Phone' || getOS() == 'iPadOS') {
-      tg.requestFullscreen();
-      console.log("作業系統是:", getOS(), " requestFullscreen");
+      postEvent('web_app_request_fullscreen')
+      console.log("作業系統是:", getOS(), " web_app_request_fullscreen");
     }
-    
   } catch (error) {
-    console.error('mounted error:', error);
+    console.log('[telegram-apps/sdk]: ',  error);
   }
+
 })
 </script>
 
