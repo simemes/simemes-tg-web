@@ -100,13 +100,13 @@
 <script setup lang="ts">
 // 導入 plugin
 import { ref, onMounted, computed, watch } from 'vue';
-// import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { animate } from 'animejs';
 import { useStore } from '../stores/store'
 import LoadingIcon from 'vue-material-design-icons/Loading.vue';
 
 const $store = useStore()
-// const router = useRouter()
+const router = useRouter()
 
 const btnIsDisabled = ref(true)
 
@@ -242,7 +242,7 @@ function GetPromoted() {
   $store.task2_num = 0
   $store.task3_num = 0
 
-  // router.push('/')
+  router.push('/')
   
   // 為解決 tg app 之 router 問題
   $store.isHome = true

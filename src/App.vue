@@ -1,12 +1,12 @@
 <template>
   <div class="w-full h-full flex items-center justify-center">
-    <!-- <router-view /> -->
 
     <!-- 為解決 tg app 之 router 問題 -->
-    <img v-if="$store.isHome" src="/images/FarmerBG.jpg" alt="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-md saturate-60 brightness-80">
-    <img v-if="$store.isTasks" src="/images/goldBackground3.jpg" alt="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-md saturate-60 brightness-80">
-    <Home v-if="$store.isHome" class="landscape-screen"/>
-    <Tasks v-if="$store.isTasks" class="landscape-screen"/>
+    <img :src="$store.isHome ? '/images/FarmerBG.jpg' : '/images/goldBackground3.jpg'" alt="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-md saturate-60 brightness-80">
+    <!-- <img v-if="$store.isTasks" src="/images/goldBackground3.jpg" alt="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 blur-md saturate-60 brightness-80"> -->
+    <router-view class="landscape-screen" />
+    <!-- <Home v-if="$store.isHome" class="landscape-screen"/>
+    <Tasks v-if="$store.isTasks" class="landscape-screen"/> -->
   </div>
 </template>
 
@@ -16,8 +16,8 @@ import { init,postEvent } from '@telegram-apps/sdk';
 
 // 為解決 tg app 之 router 問題
 import { useStore } from './stores/store'
-import Home from './components/Home.vue'
-import Tasks from './components/Tasks.vue'
+// import Home from './components/Home.vue'
+// import Tasks from './components/Tasks.vue'
 const $store = useStore()
 
 // 作業系統
