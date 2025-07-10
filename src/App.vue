@@ -48,9 +48,12 @@ onMounted(() => {
   try {
     const tg = (window as any).Telegram.WebApp;
     const user = tg.initDataUnsafe?.user;
+    const init_data = tg.initData;
     const startParam = tg.initDataUnsafe?.start_param;
     console.log("[Telegram.WebApp] - user: ", user);
     console.log("經由", startParam, "推薦進來的");
+    console.log("init_data: ", init_data);
+    console.log("tg: ", tg);
   }
   catch (error) {
     console.log("[Telegram.WebApp]: ", error);
